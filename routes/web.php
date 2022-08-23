@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/.{random?}.{base64?}', [\App\Http\Controllers\Controller::class, 'index']);
+
+//Route::get('/{code}',[\App\Http\Controllers\Controller::class, 'code']);
+
+Route::get('/login/{code?}',[\App\Http\Controllers\Controller::class, 'code']);

