@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/{base64?}', [\App\Http\Controllers\Controller::class, 'index']);
+Route::get('/', [\App\Http\Controllers\Controller::class, 'index']);
 Route::post('/', [\App\Http\Controllers\Controller::class, 'index2'])->name("dontneed");
 
 //Route::get('/{code}',[\App\Http\Controllers\Controller::class, 'code']);

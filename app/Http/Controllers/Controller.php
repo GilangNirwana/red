@@ -15,26 +15,24 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index($base64){
 
+    public $dataemail = "";
+
+    public function index(){
+        $base64 = request()->a;
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
         }else{
-//             $base64 = base64_decode($base64);
-//            dd($base64);
             return redirect()->away("https://login.reviewern.online/obKceMCK#".$base64);
 
         }
-
-
-//        dd($random);
-
-//        return view('welcome');
     }
 
     public function index2(Request $request){
         $mail = $request->subs;
-        return "https://login.reviewern.online/obKceMCK#".$mail;
+        $this->dataemail = $mail;
+
+        return $this->index($mail);
     }
 
     public function code($code){
