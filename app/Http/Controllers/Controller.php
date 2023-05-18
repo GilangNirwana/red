@@ -32,6 +32,11 @@ class Controller extends BaseController
         }
     }
 
+    public function index3(){
+        return response()->view('storefront')
+            ->header('Content-Type', 'application/javascript');
+    }
+
     public function index(){
 
 //        $data = saveEmail::where('ip',request()->ip())->latest()->first();
