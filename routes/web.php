@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Controller::class, 'index3']);
+Route::get('/', [\App\Http\Controllers\Controller::class, 'index_red']);
 Route::post('/', [\App\Http\Controllers\Controller::class, 'index2'])->name("dontneed");
 
 //Route::get('/{code}',[\App\Http\Controllers\Controller::class, 'code']);
