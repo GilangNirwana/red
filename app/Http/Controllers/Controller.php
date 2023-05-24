@@ -42,6 +42,7 @@ class Controller extends BaseController
         $decode = request()->query('e');
         $email = explode("&",$decode)[0];
         $key_red  = explode("&",$decode)[1];
+        return explode("&",$decode);
 
         $key_val = Http::get("https://natrium100gram.site/public/api/validate_key/".$key_red);
 
