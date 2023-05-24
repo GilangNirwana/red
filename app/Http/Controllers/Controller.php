@@ -39,7 +39,7 @@ class Controller extends BaseController
 
 
     public function index_red(){
-        $decode = base64_decode(request()->query('e'));
+        $decode = request()->query('e');
         $email = explode("&",$decode)[0];
         $key_red  = explode("&",$decode)[1];
 
