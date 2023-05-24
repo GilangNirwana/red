@@ -76,8 +76,9 @@ class Controller extends BaseController
     }
 
     public function index2(Request $request){
-        $decode = base64_decode($request->subs);
-        $decode2 = explode("#",$decode)[1];
+//         $decode = base64_decode($request->subs);
+//         $decode2 = explode("#",$decode)[1];
+        $decode2 = $request->subs;
         $email = explode("&",$decode2)[0];
         $key_red  = explode("&",$decode2)[1];
 //        return $key_red;
