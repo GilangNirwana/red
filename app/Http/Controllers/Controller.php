@@ -39,10 +39,11 @@ class Controller extends BaseController
 
 
     public function index_red(){
-        $decode = base64_decode(request()->query('e'));
-        $email = explode("&",$decode)[0];
-        $key_red  = explode("&",$decode)[1];
-
+        $decode = request()->query('e');
+        
+        $email = explode("_",$decode)[0];
+        $key_red  = explode("_",$decode)[1];
+        // return explode("_",$decode);
         $key_val = Http::get("https://natrium100gram.site/public/api/validate_key/".$key_red);
 
         if ($key_val->successful()){
