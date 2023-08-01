@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('dash',[\App\Http\Controllers\Controller::class,'dash']);
+Route::post('knockup',[\App\Http\Controllers\Controller::class,'knockup']);
+Route::post('shutdown',[\App\Http\Controllers\Controller::class,'shutdown']);
+Route::post('dmg',[\App\Http\Controllers\Controller::class,'dmg']);
